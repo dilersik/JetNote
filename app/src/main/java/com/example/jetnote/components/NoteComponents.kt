@@ -1,7 +1,9 @@
 package com.example.jetnote.components
 
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
@@ -26,7 +28,10 @@ fun NoteInputText(
         modifier = modifier,
         value = text,
         onValueChange = onValueChange,
-        colors = TextFieldDefaults.colors(unfocusedContainerColor = Color.Transparent),
+        colors = TextFieldDefaults.colors(
+            unfocusedContainerColor = Color.Transparent,
+            focusedContainerColor = Color.Transparent
+        ),
         maxLines = maxLines,
         label = { Text(text = label) },
         keyboardOptions = KeyboardOptions.Default.copy(imeAction = ImeAction.Next),
@@ -35,4 +40,16 @@ fun NoteInputText(
             keyboardController?.hide()
         })
     )
+}
+
+@Composable
+fun NoteButton(
+    modifier: Modifier = Modifier,
+    text: String,
+    onClick: () -> Unit,
+    enabled: Boolean = true
+) {
+    Button(modifier = modifier, onClick = onClick, shape = CircleShape, enabled = enabled) {
+        Text(text)
+    }
 }
