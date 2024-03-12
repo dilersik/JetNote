@@ -13,7 +13,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.example.jetnote.ui.theme.JetNoteTheme
 import com.example.jetnote.ui.views.NoteView
 import com.example.jetnote.ui.views.NoteViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
     private val noteViewModel: NoteViewModel by viewModels()
