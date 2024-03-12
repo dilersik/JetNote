@@ -10,5 +10,5 @@ import com.example.jetnote.model.Note
     exportSchema = false
 )
 abstract class Database : RoomDatabase() {
-    abstract fun dao(): DatabaseDao
+    abstract fun notesDao(): NotesDao
 }

@@ -7,22 +7,23 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
 import com.example.jetnote.model.Note
+import kotlinx.coroutines.flow.Flow
 
 @Dao
-interface DatabaseDao {
+interface NotesDao {
 
     @Query("SELECT * FROM notes")
-    fun getAll()
+    fun getAll(): Flow<List<Note>>
 
     @Query("SELECT * FROM notes WHERE id = :id")
-    fun getById(id: Long): Note
+    suspend fun getById(id: Long): Note
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(note: Note)
+    suspend fun insert(note: Note)
 
     @Update(onConflict = OnConflictStrategy.REPLACE)
-    fun update(note: Note)
+    suspend fun update(note: Note)
 
     @Delete
-    fun delete(note: Note)
+    suspend fun delete(note: Note)
 }
