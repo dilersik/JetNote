@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
     alias(libs.plugins.daggerHilt)
+    kotlin("kapt") version "1.9.0"
 }
 
 android {
@@ -61,11 +62,10 @@ dependencies {
     implementation(libs.lifecycle.viewmodel.compose)
     // Hilt
     implementation(libs.hilt.android)
-    implementation(libs.hilt.compiler)
+    kapt(libs.hilt.compiler)
     // Room DB
     implementation(libs.androidx.room.runtime)
-    implementation(libs.androidx.room.compiler)
-    implementation(libs.androidx.room.ktx)
+    annotationProcessor(libs.androidx.room.compiler)
     // Coroutines
     implementation(libs.kotlinx.coroutines.core)
     implementation(libs.kotlinx.coroutines.android)
