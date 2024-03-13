@@ -14,7 +14,6 @@ kotlinxCoroutinesCore = "1.8.1-Beta"
 kotlinxCoroutinesAndroid = "1.8.1-Beta"
 kotlinxCoroutinesPlayServices = "1.8.1-Beta"
 hiltAndroid = "2.51"
-roomRuntime = "2.6.1"
 daggerHiltv = "2.51"
 
 [libraries]
@@ -38,8 +37,9 @@ kotlinx-coroutines-android = { group = "org.jetbrains.kotlinx", name = "kotlinx-
 kotlinx-coroutines-play-services = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-play-services", version.ref = "kotlinxCoroutinesPlayServices" }
 hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "hiltAndroid" }
 hilt-compiler = { group = "com.google.dagger", name = "hilt-compiler", version.ref = "hiltAndroid" }
-androidx-room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "roomRuntime" }
+androidx-room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "roomCompiler" }
 androidx-room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "roomCompiler" }
+androidx-room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "roomCompiler" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
