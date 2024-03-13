@@ -4,6 +4,7 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import java.util.Calendar
+import java.util.Date
 
 @Entity(tableName = "notes")
 data class Note(
@@ -17,5 +18,5 @@ data class Note(
     val text: String,
 
     @ColumnInfo(name = "entryDate")
-    val entryDate: Long = Calendar.getInstance().timeInMillis
+    val entryDate: Date = Calendar.getInstance().time
 )
