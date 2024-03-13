@@ -1,24 +1,41 @@
 package com.example.jetnote.ui.views
 
-import androidx.compose.runtime.mutableStateListOf
 import androidx.lifecycle.ViewModel
-import com.example.jetnote.data.NoteDataSource
+import androidx.lifecycle.viewModelScope
 import com.example.jetnote.model.Note
+import com.example.jetnote.repository.NoteRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.distinctUntilChanged
+import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class NoteViewModel: ViewModel() {
+@HiltViewModel
+class NoteViewModel @Inject constructor(private val repository: NoteRepository) : ViewModel() {
 
-    private val noteList = mutableStateListOf<Note>()
+    private val _noteList = MutableStateFlow<List<Note>>(emptyList())
+    val noteList = _noteList.asStateFlow()
 
     init {
-        noteList.addAll(NoteDataSource().loadNotes())
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.getAll().distinctUntilChanged().collect {
+                _noteList.value = it
+            }
+        }
     }
 
-    fun add(note: Note) {
-        noteList.add(note)
+    fun add(note: Note) = viewModelScope.launch {
+        repository.add(note)
     }
 
-    fun remove(note: Note) {
-        noteList.remove(note)
+    fun edit(note: Note) = viewModelScope.launch {
+        repository.edit(note)
+    }
+
+    fun remove(note: Note) = viewModelScope.launch {
+        repository.delete(note)
     }
 
     fun getAll() = noteList
